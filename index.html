@@ -1,114 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+      <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>/: Being Sober :/</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        * {
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .timer-box {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-        
-        .time-unit {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: #0a0e1a;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .time-value {
-            text-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
-            z-index: 2;
-        }
-        
-        .time-label {
-            font-size: 0.75rem;
-            margin-top: -5px;
-            z-index: 2;
-        }
-        
-        .progress-ring {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            z-index: 1;
-        }
-        
-        .years-progress {
-            background: conic-gradient(#5d3c7a 0%, #5d3c7a var(--years-progress), #0a0e1a var(--years-progress), #0a0e1a 100%);
-        }
-        
-        .days-progress {
-            background: conic-gradient(#00664d 0%, #00664d var(--days-progress), #0a0e1a var(--days-progress), #0a0e1a 100%);
-        }
-        
-        .hours-progress {
-            background: conic-gradient(#8a2e5a 0%, #8a2e5a var(--hours-progress), #0a0e1a var(--hours-progress), #0a0e1a 100%);
-        }
-        
-        .minutes-progress {
-            background: conic-gradient(#0a4d7a 0%, #0a4d7a var(--minutes-progress), #0a0e1a var(--minutes-progress), #0a0e1a 100%);
-        }
-        
-        .seconds-progress {
-            background: conic-gradient(#8a6d2e 0%, #8a6d2e var(--seconds-progress), #0a0e1a var(--seconds-progress), #0a0e1a 100%);
-        }
-        
-        .pulse {
-            animation: pulse 1s infinite;
-        }
-        
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .inner-circle {
-            position: absolute;
-            width: 110px;
-            height: 110px;
-            border-radius: 50%;
-            background: #0a0e1a;
-            z-index: 1;
-        }
-    </style>
-</head>
-<body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
+    <link rel="icon" type="image/svg+xml" href="/sober.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <script type="module" src="/src/main.js"></script>
+
+
+    <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
     <div class="timer-box w-full max-w-5xl rounded-2xl p-8 fade-in">
         <!-- Header -->
         <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-2">/: Being Sober :/</h1>
         <p class="text-center text-gray-400 mb-8">for</p>
         
         <!-- Timer Display -->
-        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 my-8 justify-items-center">
+        <div class="max-w-6xl mx-auto">
+          <div class="flex flex-wrap justify-center gap-4">
             <!-- Years -->
-            <div class="time-unit">
+            <div class="time-unit items-center justify-center  md:w-auto ">
                 <div class="progress-ring years-progress" style="--years-progress: 0%"></div>
                 <div class="inner-circle"></div>
                 <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
@@ -116,7 +31,7 @@
             </div>
             
             <!-- Days -->
-            <div class="time-unit">
+            <div class="time-unit items-center justify-center  md:w-auto ">
                 <div class="progress-ring days-progress" style="--days-progress: 0%"></div>
                 <div class="inner-circle"></div>
                 <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
@@ -124,7 +39,7 @@
             </div>
             
             <!-- Hours -->
-            <div class="time-unit">
+            <div class="time-unit items-center justify-center  md:w-auto ">
                 <div class="progress-ring hours-progress" style="--hours-progress: 0%"></div>
                 <div class="inner-circle"></div>
                 <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
@@ -132,7 +47,7 @@
             </div>
             
             <!-- Minutes -->
-            <div class="time-unit">
+            <div class="time-unit items-center justify-center  md:w-auto ">
                 <div class="progress-ring minutes-progress" style="--minutes-progress: 0%"></div>
                 <div class="inner-circle"></div>
                 <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
@@ -140,11 +55,12 @@
             </div>
             
             <!-- Seconds -->
-            <div class="time-unit">
+            <div class="time-unit items-center justify-center  md:w-auto ">
                 <div class="progress-ring seconds-progress" style="--seconds-progress: 0%"></div>
                 <div class="inner-circle"></div>
                 <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400 pulse">00</div>
                 <div class="time-label text-gray-300 uppercase tracking-wider">SECONDS</div>
+            </div>
             </div>
         </div>
         
@@ -294,5 +210,5 @@
         // Update every second
         setInterval(updateTimeSince, 1000);
     </script>
-</body>
-</html>i
+  </body>
+</html>
