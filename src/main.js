@@ -1,6 +1,6 @@
 import "./style.css";
 // Hardcoded reference date - Change this to any date you want
-const referenceDate = new Date("October 6, 2025 00:00:00");
+const referenceDate = new Date("February 13, 2026 00:00:00");
 
 // DOM elements
 const yearsElement = document.querySelector(
