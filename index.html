@@ -1,81 +1,169 @@
 <!doctype html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>/: Being Sober :/</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="/being-sober/sober.svg" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script type="module" crossorigin src="/being-sober/assets/index-DFPOGGg7.js"></script>
-    <link rel="stylesheet" crossorigin href="/being-sober/assets/index-BN_VMoLL.css">
+    <meta name="theme-color" content="#0a0e1a" />
+    <title>/: Being Sober :/</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/svg+xml" href="/being-sober/sober.svg" />
+    <script type="module" crossorigin src="/being-sober/assets/index-BS2iau9X.js"></script>
+    <link rel="stylesheet" crossorigin href="/being-sober/assets/index-COJftJ70.css">
   </head>
-  <body>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <div class="ambient-glow ambient-glow--a"></div>
+    <div class="ambient-glow ambient-glow--b"></div>
+    <div class="ambient-glow ambient-glow--c"></div>
 
+    <div class="timer-box w-full max-w-5xl rounded-3xl p-8 md:p-12 fade-in">
+      <!-- Header -->
+      <h1 class="title-text text-3xl md:text-5xl font-extrabold text-center mb-2">/: Being Sober :/</h1>
+      <p class="text-center text-slate-400 mb-10 uppercase tracking-[0.3em] text-xs md:text-sm">for Being Sober</p>
 
-    <body class="bg-gradient-to-br from-gray-900 to-gray-800 min-h-screen flex items-center justify-center p-4">
-    <div class="timer-box w-full max-w-5xl rounded-2xl p-8 fade-in">
-        <!-- Header -->
-        <h1 class="text-3xl md:text-4xl font-bold text-center text-white mb-2">/: Being Sober :/</h1>
-        <p class="text-center text-gray-400 mb-8">for</p>
-        
-        <!-- Timer Display -->
-        <div class="max-w-6xl mx-auto">
-          <div class="flex flex-wrap justify-center gap-4">
-            <!-- Years -->
-            <div class="time-unit items-center justify-center  md:w-auto ">
-                <div class="progress-ring years-progress" style="--years-progress: 0%"></div>
-                <div class="inner-circle"></div>
-                <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
-                <div class="time-label text-gray-300 uppercase tracking-wider">YEARS</div>
+      <!-- Timer Display -->
+      <div class="max-w-6xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-5 md:gap-6">
+          <!-- Years -->
+          <div class="time-unit time-unit--years">
+            <div class="progress-ring years-progress" style="--years-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="years">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
-            
-            <!-- Days -->
-            <div class="time-unit items-center justify-center  md:w-auto ">
-                <div class="progress-ring days-progress" style="--days-progress: 0%"></div>
-                <div class="inner-circle"></div>
-                <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
-                <div class="time-label text-gray-300 uppercase tracking-wider">DAYS</div>
+            <div class="time-label uppercase tracking-wider">Years</div>
+          </div>
+
+          <!-- Months -->
+          <div class="time-unit time-unit--months">
+            <div class="progress-ring months-progress" style="--months-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="months">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
-            
-            <!-- Hours -->
-            <div class="time-unit items-center justify-center  md:w-auto ">
-                <div class="progress-ring hours-progress" style="--hours-progress: 0%"></div>
-                <div class="inner-circle"></div>
-                <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
-                <div class="time-label text-gray-300 uppercase tracking-wider">HOURS</div>
+            <div class="time-label uppercase tracking-wider">Months</div>
+          </div>
+
+          <!-- Days -->
+          <div class="time-unit time-unit--days">
+            <div class="progress-ring days-progress" style="--days-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="days">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
-            
-            <!-- Minutes -->
-            <div class="time-unit items-center justify-center  md:w-auto ">
-                <div class="progress-ring minutes-progress" style="--minutes-progress: 0%"></div>
-                <div class="inner-circle"></div>
-                <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400">00</div>
-                <div class="time-label text-gray-300 uppercase tracking-wider">MINUTES</div>
+            <div class="time-label uppercase tracking-wider">Days</div>
+          </div>
+
+          <!-- Hours -->
+          <div class="time-unit time-unit--hours">
+            <div class="progress-ring hours-progress" style="--hours-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="hours">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
-            
-            <!-- Seconds -->
-            <div class="time-unit items-center justify-center  md:w-auto ">
-                <div class="progress-ring seconds-progress" style="--seconds-progress: 0%"></div>
-                <div class="inner-circle"></div>
-                <div class="time-value text-2xl md:text-3xl font-bold text-cyan-400 pulse">00</div>
-                <div class="time-label text-gray-300 uppercase tracking-wider">SECONDS</div>
+            <div class="time-label uppercase tracking-wider">Hours</div>
+          </div>
+
+          <!-- Minutes -->
+          <div class="time-unit time-unit--minutes">
+            <div class="progress-ring minutes-progress" style="--minutes-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="minutes">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
+            <div class="time-label uppercase tracking-wider">Minutes</div>
+          </div>
+
+          <!-- Seconds -->
+          <div class="time-unit time-unit--seconds">
+            <div class="progress-ring seconds-progress" style="--seconds-progress: 0%"></div>
+            <div class="inner-circle"></div>
+            <div class="flip-clock" data-flip="seconds">
+              <div class="flip-digit" data-place="tens">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
+              <div class="flip-digit" data-place="ones">
+                <div class="flip-digit__inner">
+                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
+                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
+                </div>
+              </div>
             </div>
+            <div class="time-label uppercase tracking-wider">Seconds</div>
+          </div>
         </div>
-        
-        <!-- Reference Date Display -->
-        <div class="mt-10 text-center">
-            <div class="inline-block bg-gray-800 rounded-lg px-6 py-3">
-                <p class="text-gray-400 text-sm">::::  s!nc3  :::::</p>
-                <p class="text-white font-medium" id="referenceDate">January 1, 2023 00:00:00</p>
-            </div>
+      </div>
+
+      <!-- Reference Date Display -->
+      <div class="mt-12 text-center">
+        <div class="since-box inline-block rounded-2xl px-7 py-4">
+          <p class="text-slate-400 text-xs uppercase tracking-[0.3em] mb-1">s!nc3</p>
+          <p class="text-white font-medium" id="referenceDate">January 1, 2023 00:00:00</p>
         </div>
-        
-        <!-- Footer -->
-        <div class="mt-10 text-center text-gray-400 text-sm">
-            <p>@deepkt</p>
-        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-10 text-center text-slate-500 text-sm">
+        <p>@deepkt</p>
+      </div>
     </div>
+
   </body>
 </html>
