@@ -121,82 +121,165 @@ body {
   color: #f8fafc;
 }
 
-.flip-clock {
+.flip-unit {
   position: relative;
   z-index: 2;
-  display: flex;
-  gap: 3px;
+  width: 50px;
+  height: 34px;
+  --flip-h: 34px;
+  perspective: 220px;
+  perspective-origin: 50% 50%;
+  border-radius: 6px;
+  background: #11162a;
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65);
 }
 
-.flip-digit {
-  position: relative;
-  width: 1.5rem;
-  height: 2.15rem;
-  perspective: 150px;
-}
-
-.flip-digit__inner {
+/* Each half-card is a clipping window; the span inside is always the full
+   flip-unit height and vertically centered, so pinning it to the window's
+   top (for the upper half) or bottom (for the lower half) reveals exactly
+   that half of the glyph, regardless of font metrics. */
+.flip-static,
+.flip-anim {
   position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  overflow: hidden;
 }
 
-.flip-digit__inner.is-flipping {
-  animation: digit-flip 0.65s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-}
-
-@keyframes digit-flip {
-  0% {
-    transform: rotateX(0deg) scaleY(1);
-  }
-  45% {
-    transform: rotateX(-100deg) scaleY(0.8);
-  }
-  55% {
-    transform: rotateX(-100deg) scaleY(0.8);
-  }
-  100% {
-    transform: rotateX(-180deg) scaleY(1);
-  }
-}
-
-.flip-digit__face {
+.flip-static span,
+.flip-anim span {
   position: absolute;
-  inset: 0;
+  left: 0;
+  width: 100%;
+  height: var(--flip-h);
   display: flex;
   align-items: center;
   justify-content: center;
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  border-radius: 5px;
-  background: rgba(255, 255, 255, 0.04);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-family: "Roboto Mono", "Courier New", monospace;
+  font-weight: 700;
   font-size: 1.6rem;
   line-height: 1;
 }
 
-.flip-digit__face--back {
-  transform: rotateX(-180deg);
+.flip-static--upper,
+.flip-anim.fold {
+  top: 0;
+}
+.flip-static--upper span,
+.flip-anim.fold span {
+  top: 0;
 }
 
-.flip-digit::after {
-  content: "";
-  position: absolute;
-  left: 1px;
-  right: 1px;
-  top: calc(50% - 0.5px);
-  height: 1px;
-  background: rgba(0, 0, 0, 0.55);
-  z-index: 5;
-  pointer-events: none;
+.flip-static--lower,
+.flip-anim.unfold {
+  top: 50%;
+}
+.flip-static--lower span,
+.flip-anim.unfold span {
+  bottom: 0;
+}
+
+.flip-static--upper {
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.flip-static--lower {
+  border-top: 0.5px solid rgba(255, 255, 255, 0.12);
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.flip-anim {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Resting/hidden state for both overlay cards before the first real flip
+   happens, so there's never a window where an animation could be caught
+   mid-rotation before the page has even settled. visibility (not opacity)
+   is what actually hides it: opacity is a continuously-interpolated
+   property, so an "instant" opacity keyframe jump can still render as a
+   brief semi-transparent blend on the frame where it crosses over, making
+   the falling card look see-through instead of solid. visibility has no
+   partial state — it's either fully painted or not painted at all. */
+.flip-anim.idle {
+  transform: rotateX(-180deg);
+  visibility: hidden;
+}
+
+.flip-anim.unfold {
+  transform-origin: 50% 0%;
+  transform: rotateX(180deg);
+  background: #11162a;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+
+.flip-anim.fold {
+  transform-origin: 50% 100%;
+  transform: rotateX(0deg);
+  background: #11162a;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+}
+
+.flip-anim.fold {
+  animation: flip-fold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1 normal forwards;
+  transform-style: preserve-3d;
+}
+
+.flip-anim.unfold {
+  animation: flip-unfold 0.6s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s 1 normal forwards;
+  transform-style: preserve-3d;
+}
+
+@keyframes flip-fold {
+  0% {
+    transform: rotateX(0deg);
+    visibility: visible;
+  }
+  49.99% {
+    visibility: visible;
+  }
+  50% {
+    transform: rotateX(-90deg);
+    visibility: hidden;
+  }
+  100% {
+    transform: rotateX(-180deg);
+    visibility: hidden;
+  }
+}
+
+@keyframes flip-unfold {
+  0% {
+    transform: rotateX(180deg);
+    visibility: hidden;
+  }
+  50% {
+    transform: rotateX(90deg);
+    visibility: hidden;
+  }
+  50.01% {
+    visibility: visible;
+  }
+  100% {
+    transform: rotateX(0deg);
+    visibility: visible;
+  }
 }
 
 @media (min-width: 768px) {
-  .flip-digit {
-    width: 1.7rem;
-    height: 2.4rem;
+  .flip-unit {
+    width: 56px;
+    height: 40px;
+    --flip-h: 40px;
   }
-  .flip-digit__face {
+  .flip-static span,
+  .flip-anim span {
     font-size: 1.85rem;
   }
 }
@@ -220,23 +303,32 @@ body {
   transition: filter 0.25s ease;
 }
 
-.time-unit--years .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--years-color) 70%, transparent);
+/* Per-unit accent glow lives on the flip-unit's box-shadow rather than as a
+   text-shadow on the digit spans: the spans are height-cropped for the
+   split-flap effect, and a blurred text-shadow doesn't clip cleanly at that
+   boundary (it bleeds past the crop and looks like a ghosted duplicate). */
+.flip-static span,
+.flip-anim span {
+  text-shadow: none;
 }
-.time-unit--months .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--months-color) 70%, transparent);
+
+.time-unit--years .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--years-color) 55%, transparent);
 }
-.time-unit--days .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--days-color) 70%, transparent);
+.time-unit--months .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--months-color) 55%, transparent);
 }
-.time-unit--hours .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--hours-color) 70%, transparent);
+.time-unit--days .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--days-color) 55%, transparent);
 }
-.time-unit--minutes .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--minutes-color) 70%, transparent);
+.time-unit--hours .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--hours-color) 55%, transparent);
 }
-.time-unit--seconds .time-value {
-  text-shadow: 0 0 14px color-mix(in srgb, var(--seconds-color) 70%, transparent);
+.time-unit--minutes .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--minutes-color) 55%, transparent);
+}
+.time-unit--seconds .flip-unit {
+  box-shadow: 0 10px 14px -8px rgba(0, 0, 0, 0.65), 0 0 12px color-mix(in srgb, var(--seconds-color) 55%, transparent);
 }
 
 .years-progress {
