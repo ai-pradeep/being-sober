@@ -1,35 +1,212 @@
 @import "tailwindcss";
+
+:root {
+  --years-color: #d97a66;
+  --months-color: #22d3ee;
+  --days-color: #eab308;
+  --hours-color: #8b5cf6;
+  --minutes-color: #22c55e;
+  --seconds-color: #f472b6;
+}
+
 * {
   font-family: "Poppins", sans-serif;
 }
 
+html,
+body {
+  min-height: 100%;
+  background: radial-gradient(ellipse at top, #17141f 0%, #050505 65%);
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
+  isolation: isolate;
+}
+
+/* Ambient background glow blobs */
+.ambient-glow {
+  position: fixed;
+  z-index: -1;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.35;
+  pointer-events: none;
+  animation: float 14s ease-in-out infinite;
+}
+
+.ambient-glow--a {
+  width: 420px;
+  height: 420px;
+  top: -10%;
+  left: -8%;
+  background: radial-gradient(circle, var(--years-color), transparent 70%);
+}
+
+.ambient-glow--b {
+  width: 480px;
+  height: 480px;
+  bottom: -15%;
+  right: -10%;
+  background: radial-gradient(circle, var(--hours-color), transparent 70%);
+  animation-delay: -5s;
+}
+
+.ambient-glow--c {
+  width: 360px;
+  height: 360px;
+  bottom: 10%;
+  left: 30%;
+  background: radial-gradient(circle, var(--minutes-color), transparent 70%);
+  animation-delay: -9s;
+  opacity: 0.2;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(3%, -4%) scale(1.08);
+  }
+}
+
 .timer-box {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  position: relative;
+  background: linear-gradient(160deg, rgba(26, 31, 51, 0.75) 0%, rgba(10, 14, 26, 0.85) 100%);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.title-text {
+  background: linear-gradient(
+    90deg,
+    var(--years-color) 0%,
+    var(--days-color) 35%,
+    var(--hours-color) 65%,
+    var(--seconds-color) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 0 40px rgba(139, 92, 246, 0.25);
 }
 
 .time-unit {
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 128px;
+  height: 128px;
   border-radius: 50%;
   background: #0a0e1a;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.time-unit:hover {
+  transform: translateY(-4px) scale(1.04);
 }
 
 .time-value {
-  text-shadow: 0 0 10px rgba(79, 172, 254, 0.7);
   z-index: 2;
+  color: #f8fafc;
+}
+
+.flip-clock {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 3px;
+}
+
+.flip-digit {
+  position: relative;
+  width: 1.5rem;
+  height: 2.15rem;
+  perspective: 150px;
+}
+
+.flip-digit__inner {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.flip-digit__inner.is-flipping {
+  animation: digit-flip 0.65s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+@keyframes digit-flip {
+  0% {
+    transform: rotateX(0deg) scaleY(1);
+  }
+  45% {
+    transform: rotateX(-100deg) scaleY(0.8);
+  }
+  55% {
+    transform: rotateX(-100deg) scaleY(0.8);
+  }
+  100% {
+    transform: rotateX(-180deg) scaleY(1);
+  }
+}
+
+.flip-digit__face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 1.6rem;
+  line-height: 1;
+}
+
+.flip-digit__face--back {
+  transform: rotateX(-180deg);
+}
+
+.flip-digit::after {
+  content: "";
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: calc(50% - 0.5px);
+  height: 1px;
+  background: rgba(0, 0, 0, 0.55);
+  z-index: 5;
+  pointer-events: none;
+}
+
+@media (min-width: 768px) {
+  .flip-digit {
+    width: 1.7rem;
+    height: 2.4rem;
+  }
+  .flip-digit__face {
+    font-size: 1.85rem;
+  }
 }
 
 .time-label {
-  font-size: 0.75rem;
-  margin-top: -5px;
+  font-size: 0.7rem;
+  margin-top: -4px;
   z-index: 2;
+  color: rgba(226, 232, 240, 0.55);
+  letter-spacing: 0.12em;
 }
 
 .progress-ring {
@@ -40,77 +217,96 @@
   height: 100%;
   border-radius: 50%;
   z-index: 1;
+  transition: filter 0.25s ease;
+}
+
+.time-unit--years .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--years-color) 70%, transparent);
+}
+.time-unit--months .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--months-color) 70%, transparent);
+}
+.time-unit--days .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--days-color) 70%, transparent);
+}
+.time-unit--hours .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--hours-color) 70%, transparent);
+}
+.time-unit--minutes .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--minutes-color) 70%, transparent);
+}
+.time-unit--seconds .time-value {
+  text-shadow: 0 0 14px color-mix(in srgb, var(--seconds-color) 70%, transparent);
 }
 
 .years-progress {
   background: conic-gradient(
-    #5d3c7a 0%,
-    #5d3c7a var(--years-progress),
-    #0a0e1a var(--years-progress),
-    #0a0e1a 100%
+    var(--years-color) 0%,
+    var(--years-color) var(--years-progress),
+    #131826 var(--years-progress),
+    #131826 100%
   );
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--years-color) 55%, transparent));
+}
+
+.months-progress {
+  background: conic-gradient(
+    var(--months-color) 0%,
+    var(--months-color) var(--months-progress),
+    #131826 var(--months-progress),
+    #131826 100%
+  );
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--months-color) 55%, transparent));
 }
 
 .days-progress {
   background: conic-gradient(
-    #00664d 0%,
-    #00664d var(--days-progress),
-    #0a0e1a var(--days-progress),
-    #0a0e1a 100%
+    var(--days-color) 0%,
+    var(--days-color) var(--days-progress),
+    #131826 var(--days-progress),
+    #131826 100%
   );
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--days-color) 55%, transparent));
 }
 
 .hours-progress {
   background: conic-gradient(
-    #8a2e5a 0%,
-    #8a2e5a var(--hours-progress),
-    #0a0e1a var(--hours-progress),
-    #0a0e1a 100%
+    var(--hours-color) 0%,
+    var(--hours-color) var(--hours-progress),
+    #131826 var(--hours-progress),
+    #131826 100%
   );
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--hours-color) 55%, transparent));
 }
 
 .minutes-progress {
   background: conic-gradient(
-    #0a4d7a 0%,
-    #0a4d7a var(--minutes-progress),
-    #0a0e1a var(--minutes-progress),
-    #0a0e1a 100%
+    var(--minutes-color) 0%,
+    var(--minutes-color) var(--minutes-progress),
+    #131826 var(--minutes-progress),
+    #131826 100%
   );
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--minutes-color) 55%, transparent));
 }
 
 .seconds-progress {
   background: conic-gradient(
-    #8a6d2e 0%,
-    #8a6d2e var(--seconds-progress),
-    #0a0e1a var(--seconds-progress),
-    #0a0e1a 100%
+    var(--seconds-color) 0%,
+    var(--seconds-color) var(--seconds-progress),
+    #131826 var(--seconds-progress),
+    #131826 100%
   );
-}
-
-.pulse {
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  100% {
-    transform: scale(1);
-  }
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--seconds-color) 55%, transparent));
 }
 
 .fade-in {
-  animation: fadeIn 0.5s ease-in;
+  animation: fadeIn 0.6s ease-out;
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -120,9 +316,16 @@
 
 .inner-circle {
   position: absolute;
-  width: 110px;
-  height: 110px;
+  width: 108px;
+  height: 108px;
   border-radius: 50%;
-  background: #0a0e1a;
+  background: radial-gradient(circle at 35% 30%, #151b2c 0%, #0a0e1a 75%);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.06);
   z-index: 1;
+}
+
+.since-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
 }
