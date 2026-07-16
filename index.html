@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#0a0e1a" />
     <title>/: Being Sober :/</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Roboto+Mono:wght@500;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="/sober.svg" />
   </head>
   <body class="min-h-screen flex items-center justify-center p-4">
@@ -25,19 +25,11 @@
           <div class="time-unit time-unit--years">
             <div class="progress-ring years-progress" style="--years-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="years">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="years">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Years</div>
           </div>
@@ -46,19 +38,11 @@
           <div class="time-unit time-unit--months">
             <div class="progress-ring months-progress" style="--months-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="months">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="months">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Months</div>
           </div>
@@ -67,19 +51,11 @@
           <div class="time-unit time-unit--days">
             <div class="progress-ring days-progress" style="--days-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="days">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="days">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Days</div>
           </div>
@@ -88,19 +64,11 @@
           <div class="time-unit time-unit--hours">
             <div class="progress-ring hours-progress" style="--hours-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="hours">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="hours">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Hours</div>
           </div>
@@ -109,19 +77,11 @@
           <div class="time-unit time-unit--minutes">
             <div class="progress-ring minutes-progress" style="--minutes-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="minutes">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="minutes">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Minutes</div>
           </div>
@@ -130,19 +90,11 @@
           <div class="time-unit time-unit--seconds">
             <div class="progress-ring seconds-progress" style="--seconds-progress: 0%"></div>
             <div class="inner-circle"></div>
-            <div class="flip-clock" data-flip="seconds">
-              <div class="flip-digit" data-place="tens">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
-              <div class="flip-digit" data-place="ones">
-                <div class="flip-digit__inner">
-                  <div class="flip-digit__face flip-digit__face--front time-value">0</div>
-                  <div class="flip-digit__face flip-digit__face--back time-value">0</div>
-                </div>
-              </div>
+            <div class="flip-unit" data-flip="seconds">
+              <div class="flip-static flip-static--upper"><span class="time-value">00</span></div>
+              <div class="flip-static flip-static--lower"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--a idle"><span class="time-value">00</span></div>
+              <div class="flip-anim flip-anim--b idle"><span class="time-value">00</span></div>
             </div>
             <div class="time-label uppercase tracking-wider">Seconds</div>
           </div>

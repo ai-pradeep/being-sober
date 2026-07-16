@@ -2,42 +2,62 @@ import "./style.css";
 // Hardcoded reference date - Change this to any date you want
 const referenceDate = new Date("February 13, 2026 00:00:00");
 
-// Wires up a single flip-clock digit: call .set("7") to flip to a new
-// value, no-ops if the value hasn't changed or a flip is already mid-motion
-function createFlipDigit(digitEl) {
-  const inner = digitEl.querySelector(".flip-digit__inner");
-  const front = digitEl.querySelector(".flip-digit__face--front");
-  const back = digitEl.querySelector(".flip-digit__face--back");
-  let current = front.textContent;
-
-  function set(value) {
-    if (value === current || inner.classList.contains("is-flipping")) return;
-    back.textContent = value;
-
-    const onAnimationEnd = () => {
-      inner.removeEventListener("animationend", onAnimationEnd);
-      front.textContent = value;
-      inner.classList.remove("is-flipping");
-      current = value;
-    };
-    inner.addEventListener("animationend", onAnimationEnd);
-    inner.classList.add("is-flipping");
-  }
-
-  return { set };
-}
-
-// Wires up a two-digit dial (tens + ones), each digit flipping
-// independently only when its own value changes
+// Wires up a split-flap flip-unit (two static halves + two overlay cards
+// that alternate playing the "fold" and "unfold" keyframe each time the
+// value changes). Alternating which physical element plays which animation
+// every tick means the assigned class always differs from the previous
+// tick, so the animation restarts reliably with no manual reset needed.
 function createFlipUnit(unitName) {
   const root = document.querySelector(`[data-flip="${unitName}"]`);
-  const tens = createFlipDigit(root.querySelector('[data-place="tens"]'));
-  const ones = createFlipDigit(root.querySelector('[data-place="ones"]'));
+  const upper = root.querySelector(".flip-static--upper span");
+  const lower = root.querySelector(".flip-static--lower span");
+  const cardA = root.querySelector(".flip-anim--a");
+  const cardB = root.querySelector(".flip-anim--b");
+  const cardASpan = cardA.querySelector("span");
+  const cardBSpan = cardB.querySelector("span");
+
+  let current = upper.textContent;
+  let shuffle = true;
+
+  function render(value, previous) {
+    upper.textContent = value;
+    lower.textContent = previous;
+
+    const digit1 = shuffle ? previous : value;
+    const digit2 = shuffle ? value : previous;
+    const anim1 = shuffle ? "fold" : "unfold";
+    const anim2 = shuffle ? "unfold" : "fold";
+
+    cardASpan.textContent = digit1;
+    cardA.className = `flip-anim flip-anim--a ${anim1}`;
+    cardBSpan.textContent = digit2;
+    cardB.className = `flip-anim flip-anim--b ${anim2}`;
+
+    // The lower half only shows the *previous* value so the overlay has
+    // something matching to fold away from. The unfold card is invisible
+    // for the first half of the animation (still folded flat against the
+    // hinge) and only becomes visible partway through, growing into place
+    // via a 3D rotation — and a rotated plane doesn't fully cover its
+    // target area until it's flat, so whatever sits behind it peeks
+    // through the gap while it's still foreshortened. Correcting the lower
+    // half to the current value right as that reveal begins (the
+    // animation's halfway point) means the peek-through shows the
+    // *correct* value instead of a stale one; waiting until the animation
+    // fully ends corrects it too late, after the reveal already happened.
+    window.setTimeout(() => {
+      if (lower.textContent === previous) {
+        lower.textContent = value;
+      }
+    }, 300);
+  }
 
   return {
     set(value) {
-      tens.set(value[0]);
-      ones.set(value[1]);
+      if (value === current) return;
+      const previous = current;
+      current = value;
+      shuffle = !shuffle;
+      render(current, previous);
     },
   };
 }
